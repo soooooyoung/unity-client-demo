@@ -17,7 +17,6 @@ public class SceneTransitionManager : SingletonMonobehavior<SceneTransitionManag
 
     public SceneName startingSceneName;
 
-
     private IEnumerator Start()
     {
 
@@ -27,7 +26,6 @@ public class SceneTransitionManager : SingletonMonobehavior<SceneTransitionManag
         EventHandler.CallAfterSceneLoadEvent();
 
     }
-
 
     public void LoadAndSwitchScenes(string sceneName)
     {
@@ -39,6 +37,7 @@ public class SceneTransitionManager : SingletonMonobehavior<SceneTransitionManag
         LoadNewScene(sceneName);
 
     }
+
     public async void LoadNewScene(string sceneName)
     {
         AsyncOperation unloadScene = SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
@@ -64,6 +63,9 @@ public class SceneTransitionManager : SingletonMonobehavior<SceneTransitionManag
             await Task.Delay(100);
         }
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
+
+        // FindObjectOfType<CameraController>().SetCameraPosition(/* targetPosition */);
+
         EventHandler.CallAfterSceneLoadEvent();
         // Call after scene load event
 
